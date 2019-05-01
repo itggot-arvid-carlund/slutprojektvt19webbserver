@@ -3,7 +3,11 @@
 # Projektplan
 
 ## 1. Projektbeskrivning
+Privat forum med downvotes och upvotes
+
 ## 2. Vyer (sidor)
+    ### Frontpage
+
 ## 3. Funktionalitet (med sekvensdiagram)
 ## 4. Arkitektur (Beskriv filer och mappar)
 ## 5. (Databas med ER-diagram)
