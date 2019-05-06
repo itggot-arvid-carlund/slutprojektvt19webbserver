@@ -1,0 +1,12 @@
+h2 Hallå eller, just nu är du välkommen på #{posts[0]['username']}
+ 
+- posts.each do |post|
+    p   
+        h2 
+            a href="/posts/#{posts["postID"]}" 
+                h2 #{posts["title"]}
+            p #{posts["text"]}
+    p    
+        p written #{posts["time"]} by 
+        a href="/posts/#{posts['userID']}"  
+            h3 #{posts["username"]}

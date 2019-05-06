@@ -7,6 +7,11 @@ html lang="en"
         title Xeddit
     body
         header
-            a href="/" Welcome to Xeddittttt
+            a href="/welcome" Welcome to Xeddittttt
             .wrapper
-        == yield  
+            / - if session[:username] != nil
+            /         p Welcome, you are logged in as #{session[:username]}
+ 
+            /     a href="/blogg_create" create post 
+            /     a href="/logout" logout
+            == yield  

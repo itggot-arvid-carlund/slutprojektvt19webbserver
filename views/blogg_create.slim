@@ -1,8 +1,21 @@
-form action="/blogg_create" method="POST"
+h1 Kreta a post or go to Kreta!
+
+form action="/create_post" method="POST"
     article
         .info 
-            input name="Title" placeholder="Title" type="text"
-            input name="Text" placeholder="Text" type="text"
-            input name="Date" placeholder="Date" type="date"
-            / input name="Image" placeholder="" type="img" Lägg in bilder!
+            input name="title" placeholder="Title" type="text"
+            textarea rows="8" cols="50" name="text" placeholder="Skriv va fasen du vill"
             input value="Submit din jäkel!" placeholder="" type="submit"
+
+
+h2 Delete eller ändra dina posts 
+
+- posts.each do |post|
+    p = post["title"]
+    form action="/deletepost" method="post"
+            input type="hidden" name="postID" value="#{post["postID"]}"
+            input type="submit" value="delete"        
+    form action="/edit_posts/#{post["postID"]}" method="get"
+            input type="hidden" name="title" value="#{post["title"]}"
+            input type="hidden" name="postID" value="#{post["postID"]}"
+            input type="submit" value="edit"

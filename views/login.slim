@@ -1,17 +1,13 @@
 - if session[:username] == nil
 
-    form action="/login" method="POST"
-        input name="username" placeholder="Username" type="text"
-        input name="password" placeholder="Password" type="password"
-        input value="Submit" placeholder="" type="submit"
+        form action="/login" method="POST"
+            input name="username" placeholder="Username" type="text"
+            input name="password" placeholder="Password" type="password"
+            input value="Submit" placeholder="" type="submit"
 
-    form action="/register" method="POST"
-        input name="username" placeholder="Username" type="text"
-        input name="password1" placeholder="Password" type="password"
-        input name="password2" placeholder="Password validate" type="password"
-        input value="Submit" placeholder="" type="submit"
-
-- if session[:username] != nil
-        p logged in as #{session[:username]}
-        a href="/create_post" create post 
-        a href="/logout" logout
+        form action="/register" method="POST"
+            input name="username" placeholder="Username" type="text"
+            input name="password1" placeholder="Password" type="password"
+            input name="password2" placeholder="Password validate" type="password"
+            input value="Submit" placeholder="" type="submit"
+    
