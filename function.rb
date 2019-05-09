@@ -26,6 +26,14 @@ def register(username,password)
     db.execute("INSERT INTO users (username, password_hash) VALUES (?, ?)", username, BCrypt::Password.create(password))
 end
 
+# Attempts to create a new post in the posts table
+    #
+    # @param [String] title, The title of the article
+    # @param [String] text, The text of the article
+    # @param [Integer] UserID, The Id of the user
+    # @param [String] time, The timestamp of the article
+    # @param [Integer] upvote_counter, The upvote_counter of the article
+    #
 def create_post(title,text)
     db = SQLite3::Database.new("db/db.db")
     db.results_as_hash = true
