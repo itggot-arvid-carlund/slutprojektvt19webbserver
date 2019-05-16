@@ -12,6 +12,12 @@ get('/') do
     slim(:index)
 end
 
+# Display error Page
+#
+get('/error_page') do
+    slim(:error_page)
+end
+
 # The login page & register page
 #
 get('/login') do
@@ -63,7 +69,7 @@ post('/login') do
         redirect('/welcome')
     else
         session[:logged_in] = false
-        redirect('/')
+        redirect('/error_page')
     end    
 end
 
@@ -88,11 +94,11 @@ end
 #
 # @see function#create_post
 post('/create_post') do
-    if params["title"].length > 0 && params["text"].length > 0
+    if params["title"].length > 0 && params["text"].length > 80
         create_post(params["title"],params["text"])
         redirect('/post_all')
     else
-        redirect('/welcome')
+        redirect('/error_page')
     end
 end
 
@@ -103,7 +109,7 @@ get('/create_post') do
     if session[:logged_in] == true
         slim(:blogg_create)
     else
-        redirect('/')
+        redirect('/error_page')
     end
 end
 
@@ -129,7 +135,7 @@ post('/edit_post') do
         edit_posts(params["postID"], params["title"], params["text"])
         redirect('/post_all')
         else
-            redirect('/blogg_create')
+            redirect('/error_page')
     end
 end
 
