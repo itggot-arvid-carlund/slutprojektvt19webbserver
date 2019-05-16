@@ -75,21 +75,25 @@ end
 #
 # @see function#register
 post('/register') do
-    if params["password1"] == params["password2"]
+    if params["password1"] == params["password2"] && params["password1"].length > 0
     register(params["username"], params["password1"])
     end
     redirect('/')
 end
 
-# Creates a new article and redirects to '/welcome'
+# Creates a new post and redirects to '/welcome'
 #
 # @param [String] title, The title of the article
-# @param [String] content, The content of the article
+# @param [String] text, The text of the article
 #
 # @see function#create_post
 post('/create_post') do
-    create_post(params["title"],params["text"])
-    redirect('/welcome')
+    if params["title"].length > 0 && params["text"].length > 0
+        create_post(params["title"],params["text"])
+        redirect('/post_all')
+    else
+        redirect('/welcome')
+    end
 end
 
 # Attempts creating a post
@@ -121,8 +125,12 @@ end
 #
 # @see function#edit_post
 post('/edit_post') do
-    edit_posts(params["postID"], params["title"], params["text"])
-    redirect('/post_all')
+    if params["title"].length > 0 && params["text"].length > 0
+        edit_posts(params["postID"], params["title"], params["text"])
+        redirect('/post_all')
+        else
+            redirect('/blogg_create')
+    end
 end
 
 # Edits a single Article

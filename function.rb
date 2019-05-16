@@ -5,6 +5,14 @@ require 'byebug'
 require 'BCrypt'
 enable :sessions
 
+ # Finds an article
+    #
+    # @param [Hash] params form data
+    # @option params [String] username The username
+    # @option params [String] password The password
+    #
+    # @return [Integer] The ID of the user
+    # @return [false] if credentials do not match a user
 def login_(username, password)
     db = SQLite3::Database.new("db/db.db")     
     password_hash = db.execute("SELECT users.password_hash FROM users WHERE users.username = ?", username)
@@ -15,6 +23,11 @@ def login_(username, password)
     end
 end
 
+# Gets a userID from a username by checking database
+    #
+    # @param [String] username, username
+    #
+    # @return [Integer] the user id
 def get_userID(username)
     db = SQLite3::Database.new("db/db.db")
     userID = db.execute("SELECT users.userID FROM users WHERE users.username = ?", username) 
@@ -41,6 +54,9 @@ def create_post(title,text)
     db.execute("INSERT INTO posts (title, text, userID, time, upvote_counter) VALUES (?,?,?,?,?)", title, text, session[:userID], time, 0)
 end
 
+# Gets all posts in database
+#
+# @return [Hash] returns all posts
 def get_posts()
     db = SQLite3::Database.new("db/db.db")
     db.results_as_hash = true
@@ -48,6 +64,9 @@ def get_posts()
     return result
 end
 
+# Gets one posts in database
+#
+# @return [Hash] returns one posts
 def get_1post(id)
     db = SQLite3::Database.new("db/db.db")
     db.results_as_hash = true
@@ -55,6 +74,9 @@ def get_1post(id)
     return result
 end
 
+# Gets all users posts in database
+#
+# @return [Hash] returns users posts
 def get_usersposts(id)
     db = SQLite3::Database.new("db/db.db")
     db.results_as_hash = true
@@ -62,11 +84,23 @@ def get_usersposts(id)
     return result
 end
 
+# Attempts to delete a post from the post table
+    #
+    # @param [Integer] postID The post's ID
+    # @option params [String] title The title of the post
+    # @option params [String] text The text of the post
+    #
 def deletepost(postID)
     db = SQLite3::Database.new("db/db.db")
     db.execute("DELETE FROM posts WHERE postID = ?", postID)
 end
 
+# Attempts to update a post in the posts table
+    #
+    # @param [Integer] postID The post's ID
+    # @option params [String] title The title of the post
+    # @option params [String] text The text of the post
+    #
 def edit_posts(postID, title, text)
     db = SQLite3::Database.new("db/db.db")
     time = Time.now.asctime
