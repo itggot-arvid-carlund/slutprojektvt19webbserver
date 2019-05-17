@@ -69,7 +69,7 @@ post('/login') do
         redirect('/welcome')
     else
         session[:logged_in] = false
-        redirect('/error_page')
+        set_error("login wrong")
     end    
 end
 
@@ -98,7 +98,7 @@ post('/create_post') do
         create_post(params["title"],params["text"])
         redirect('/post_all')
     else
-        redirect('/error_page')
+        set_error("nu blev det galet med skapandet av din lilla post")
     end
 end
 
@@ -135,7 +135,7 @@ post('/edit_post') do
         edit_posts(params["postID"], params["title"], params["text"])
         redirect('/post_all')
         else
-            redirect('/error_page')
+            set_error('FEEEL')
     end
 end
 
@@ -168,4 +168,9 @@ end
 get('/logout') do
     session.clear
     redirect('/')
+end
+
+def set_error(error_message)
+    session[:error] = error_message
+    slim(:error_page)
 end
