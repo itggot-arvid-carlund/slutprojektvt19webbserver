@@ -169,3 +169,10 @@ get('/logout') do
     session.clear
     redirect('/')
 end
+
+# Error message
+#
+def set_error(error_message)
+    session[:error] = error_message
+    slim(:error_page)
+end

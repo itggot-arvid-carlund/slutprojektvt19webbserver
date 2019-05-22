@@ -106,11 +106,3 @@ def edit_posts(postID, title, text)
     time = Time.now.asctime
     db.execute("UPDATE posts SET title = ?, text = ?, time = ? WHERE postID = ?", title, text, time, postID)
 end
-
-# Error message
-#
-# @return [Hash] returns error message
-def set_error(error_message)
-    session[:error] = error_message
-    slim(:error_page)
-end
